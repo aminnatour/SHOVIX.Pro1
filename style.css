@@ -1,0 +1,631 @@
+/* ==========================================
+   MY PROFILE - LUXURY LINK PAGE
+   Facebook + Instagram
+   ========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: #020202;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+/* ==========================================
+   BACKGROUND
+   ========================================== */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+
+    background:
+        radial-gradient(circle at 30% 20%, #241d0a 0%, transparent 45%),
+        radial-gradient(circle at 80% 85%, #150a2e 0%, transparent 45%),
+        #050505;
+
+    filter: saturate(1.15) contrast(1.08);
+    transform: scale(1.03);
+
+    /* حركة 3D خفيفة جدًا للخلفية نفسها */
+    animation: softBackground3D 18s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+@keyframes softBackground3D {
+    0%   { transform: scale(1.03) translate3d(-3px, -2px, 0); }
+    50%  { transform: scale(1.035) translate3d(2px, 1px, 0); }
+    100% { transform: scale(1.03) translate3d(-1px, 2px, 0); }
+}
+
+.background-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(circle at 50% 20%, rgba(255, 215, 100, 0.09), transparent 32%),
+        radial-gradient(circle at 20% 70%, rgba(100, 70, 255, 0.035), transparent 35%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.88));
+}
+
+/* أخف على الهاتف */
+@media (max-width: 600px) {
+    .background {
+        animation-duration: 24s;
+    }
+}
+
+/* ==========================================
+   MAIN
+   ========================================== */
+
+.container {
+    width: min(100% - 30px, 620px);
+    margin: auto;
+    padding: 55px 0 35px;
+}
+
+/* ==========================================
+   PROFILE
+   ========================================== */
+
+.profile {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.avatar {
+    position: relative;
+    width: 175px;
+    height: 175px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    padding: 5px;
+
+    background: conic-gradient(from 0deg, #fff1a8, #d4af37, #fff8d0, #8d6b13, #d4af37, #fff1a8);
+
+    box-shadow:
+        0 0 0 1px rgba(255, 215, 100, 0.35),
+        0 0 30px rgba(212, 175, 55, 0.35),
+        0 0 70px rgba(212, 175, 55, 0.12);
+
+    animation: avatarFloat 5s ease-in-out infinite;
+}
+
+.avatar::before {
+    content: "";
+    position: absolute;
+    inset: -9px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    animation: avatarRing 8s linear infinite;
+}
+
+.avatar::after {
+    content: "";
+    position: absolute;
+    inset: -18px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top-color: rgba(212, 175, 55, 0.5);
+    animation: avatarRingReverse 12s linear infinite;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #050505;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+/* ==========================================
+   PROFILE TEXT
+   ========================================== */
+
+.profile h1 {
+    font-size: clamp(34px, 8vw, 52px);
+    letter-spacing: 7px;
+    margin-bottom: 8px;
+    font-weight: 900;
+
+    background: linear-gradient(90deg, #8c6a15, #fff2a6, #d4af37, #fff7c7, #8c6a15);
+    background-size: 250% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: goldMove 5s linear infinite;
+    text-shadow: 0 0 25px rgba(212, 175, 55, 0.12);
+}
+
+.profile .username {
+    color: #d4af37;
+    font-size: 15px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.profile p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 380px;
+    margin-inline: auto;
+}
+
+/* ==========================================
+   LINKS
+   ========================================== */
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ==========================================
+   LINK CARD
+   ========================================== */
+
+.link-card {
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    --platform-color: 212, 175, 55;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    min-height: 88px;
+    padding: 14px 18px;
+
+    text-decoration: none;
+    color: #fff;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 22px;
+
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.025));
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    overflow: hidden;
+    isolation: isolate;
+    transform-style: preserve-3d;
+    cursor: pointer;
+
+    transition:
+        transform 0.22s cubic-bezier(.16, 1, .3, 1),
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.35s ease;
+}
+
+/* ==========================================
+   MOUSE FOLLOW LIGHT
+   ========================================== */
+
+.link-card::after {
+    content: "";
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    left: var(--mouse-x);
+    top: var(--mouse-y);
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: radial-gradient(circle,
+        rgba(var(--platform-color), 0.25) 0%,
+        rgba(var(--platform-color), 0.10) 25%,
+        transparent 70%);
+
+    filter: blur(10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: -1;
+}
+
+.link-card:hover::after {
+    opacity: 1;
+}
+
+/* ==========================================
+   MOVING SHINE
+   ========================================== */
+
+.link-card::before {
+    content: "";
+    position: absolute;
+
+    top: -40%;
+    left: -80%;
+    width: 45%;
+    height: 180%;
+
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    transform: rotate(18deg);
+
+    pointer-events: none;
+    opacity: 0;
+    z-index: 5;
+}
+
+.link-card:hover::before {
+    opacity: 1;
+    animation: shineMove 0.85s cubic-bezier(.2, .7, .2, 1);
+}
+
+/* ==========================================
+   INSTAGRAM
+   ========================================== */
+
+.link-card.instagram {
+    --platform-color: 225, 48, 108;
+}
+
+.link-card.instagram:hover {
+    border-color: rgba(225, 48, 108, 0.75);
+
+    background: linear-gradient(135deg,
+        rgba(225, 48, 108, 0.13),
+        rgba(131, 58, 180, 0.08),
+        rgba(0, 0, 0, 0.18));
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(225, 48, 108, 0.08),
+        0 0 35px rgba(225, 48, 108, 0.18),
+        0 0 80px rgba(131, 58, 180, 0.08);
+}
+
+/* ==========================================
+   FACEBOOK
+   ========================================== */
+
+.link-card.facebook {
+    --platform-color: 24, 119, 242;
+}
+
+.link-card.facebook:hover {
+    border-color: rgba(24, 119, 242, 0.75);
+
+    background: linear-gradient(135deg,
+        rgba(24, 119, 242, 0.13),
+        rgba(24, 119, 242, 0.04),
+        rgba(0, 0, 0, 0.18));
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(24, 119, 242, 0.08),
+        0 0 35px rgba(24, 119, 242, 0.18),
+        0 0 80px rgba(24, 119, 242, 0.08);
+}
+
+/* ==========================================
+   ICON
+   ========================================== */
+
+.link-icon {
+    position: relative;
+
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        0 8px 20px rgba(0, 0, 0, 0.25);
+
+    transform: translateZ(20px);
+
+    transition:
+        transform 0.35s cubic-bezier(.16, 1, .3, 1),
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.link-icon svg {
+    width: 29px;
+    height: 29px;
+    transition: transform 0.35s cubic-bezier(.16, 1, .3, 1), filter 0.3s ease;
+}
+
+.instagram .link-icon { color: #e1306c; }
+
+.instagram:hover .link-icon {
+    background: linear-gradient(135deg, rgba(225, 48, 108, 0.20), rgba(131, 58, 180, 0.16));
+    border-color: rgba(225, 48, 108, 0.65);
+    box-shadow: 0 0 22px rgba(225, 48, 108, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.facebook .link-icon { color: #1877f2; }
+
+.facebook:hover .link-icon {
+    background: rgba(24, 119, 242, 0.15);
+    border-color: rgba(24, 119, 242, 0.65);
+    box-shadow: 0 0 22px rgba(24, 119, 242, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.link-card:hover .link-icon {
+    transform: translateZ(55px) scale(1.10) rotate(-3deg);
+}
+
+.link-card:hover .link-icon svg {
+    transform: scale(1.12);
+    filter: drop-shadow(0 0 8px rgba(var(--platform-color), 0.65));
+}
+
+/* ==========================================
+   CONTENT
+   ========================================== */
+
+.link-content {
+    flex: 1;
+    margin-right: 16px;
+    transform: translateZ(30px);
+    transition: transform 0.35s cubic-bezier(.16, 1, .3, 1);
+    text-align: right;
+}
+
+.link-content strong {
+    display: block;
+    font-size: 17px;
+    margin-bottom: 5px;
+    letter-spacing: 0.4px;
+    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.link-content span {
+    display: block;
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 12px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.link-card:hover .link-content {
+    transform: translateZ(45px) translateX(3px);
+}
+
+.link-card:hover .link-content strong {
+    color: #fff;
+    text-shadow: 0 0 14px rgba(var(--platform-color), 0.45);
+}
+
+.link-card:hover .link-content span {
+    color: rgba(255, 255, 255, 0.78);
+    transform: translateX(2px);
+}
+
+/* ==========================================
+   ARROW
+   ========================================== */
+
+.arrow {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    transform: translateZ(25px);
+
+    transition:
+        transform 0.35s cubic-bezier(.16, 1, .3, 1),
+        color 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.arrow svg {
+    width: 18px;
+    height: 18px;
+    transform: scaleX(-1); /* يشاور لليسار عشان اتجاه RTL */
+}
+
+.link-card:hover .arrow {
+    transform: translateZ(55px) translateX(-7px) scale(1.08);
+    color: rgb(var(--platform-color));
+    background: rgba(var(--platform-color), 0.10);
+    border-color: rgba(var(--platform-color), 0.35);
+    box-shadow: 0 0 18px rgba(var(--platform-color), 0.18);
+}
+
+/* ==========================================
+   CARD HOVER / FOCUS
+   ========================================== */
+
+.link-card:hover,
+.link-card:focus-visible {
+    transform: perspective(900px) translateY(-8px) rotateX(3deg) rotateY(-1.5deg) scale(1.018);
+}
+
+.link-card:focus-visible {
+    outline: 2px solid rgb(var(--platform-color));
+    outline-offset: 3px;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.footer {
+    text-align: center;
+    margin-top: 35px;
+    color: rgba(255, 255, 255, 0.38);
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.footer strong {
+    display: block;
+    color: rgba(212, 175, 55, 0.7);
+    margin-bottom: 7px;
+}
+
+/* ==========================================
+   TOAST
+   ========================================== */
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translate(-50%, 20px) scale(0.95);
+
+    padding: 12px 20px;
+    border-radius: 14px;
+
+    background: rgba(10, 10, 10, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    color: #fff;
+    font-size: 13px;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45), 0 0 20px rgba(212, 175, 55, 0.10);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 100;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+}
+
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+
+@keyframes shineMove {
+    0% { left: -80%; }
+    100% { left: 150%; }
+}
+
+@keyframes avatarFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+
+@keyframes avatarRing {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes avatarRingReverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+@keyframes goldMove {
+    0% { background-position: 0% center; }
+    100% { background-position: 250% center; }
+}
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: min(100% - 22px, 620px);
+        padding-top: 45px;
+    }
+
+    .avatar {
+        width: 150px;
+        height: 150px;
+    }
+
+    .profile h1 {
+        font-size: 34px;
+        letter-spacing: 5px;
+    }
+
+    .link-card {
+        min-height: 82px;
+        padding: 12px 14px;
+        border-radius: 19px;
+    }
+
+    .link-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 15px;
+    }
+
+    .link-content {
+        margin-right: 13px;
+    }
+
+    .link-content strong {
+        font-size: 15px;
+    }
+
+    .arrow {
+        width: 38px;
+        height: 38px;
+    }
+
+    /* على الهاتف لا نحتاج حركة 3D قوية */
+    .link-card:hover {
+        transform: translateY(-5px) scale(1.01);
+    }
+}
+
+/* ==========================================
+   REDUCED MOTION
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
